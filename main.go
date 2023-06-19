@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"strings"
 )
 
 type cliCommand struct {
@@ -43,43 +42,4 @@ func main() {
 
 	}
 
-}
-
-func normalizeInput(text string) []string {
-	result := strings.ToLower(text)
-	words := strings.Fields(result)
-	return words
-}
-
-func commands() map[string]cliCommand {
-	return map[string]cliCommand{
-		"help": {
-			name:     "help",
-			desc:     "This displays a helpful message.",
-			callback: cmdHelp,
-		},
-		"exit": {
-			name:     "exit",
-			desc:     "Quits the PokeDex REPL",
-			callback: cmdExit,
-		},
-	}
-}
-
-// cb functions
-func cmdHelp() error {
-	fmt.Println("...")
-	fmt.Println("POKEDEX HELP MENU")
-	fmt.Println("List of Commands:")
-	fmt.Println("...")
-	for _, cmd := range commands() {
-		fmt.Printf("%v: %v\n", cmd.name, cmd.desc)
-	}
-	fmt.Println("...")
-	return nil
-}
-
-func cmdExit() error {
-	os.Exit(0)
-	return nil
 }
